@@ -340,9 +340,9 @@
 
 <p>All models in the comparison perform well in the beginning; however, the gap increases over time and at the horizon of hundreds of digit transitions, REGIS is the only model that retains its initial quality. Models also take distinct approaches to the transition between digits, as illustrated in the video below - while REGIS gradually reshapes the stroke, reusing the present structures, other methods merely interpolate between digits or noise-denoise them.</p>
 
-<figure class="l-page mnist-comparison">
+<figure class="l-body mnist-comparison">
   <video src="assets/video/mnist-comparison.mp4" poster="assets/figures/mnist-comparison-poster.webp"
-         width="1480" height="640" autoplay loop muted playsinline controls preload="metadata"
+         width="1480" height="640" autoplay loop muted playsinline preload="metadata"
          aria-label="Four matched digit trajectories per model: REGIS on the left, MMSFM in the centre, and MMtSBM on the right, aligned through ten digit transitions."
          aria-describedby="mnist-comparison-caption"></video>
   <figcaption id="mnist-comparison-caption"><span class="lbl">How the models move between digits.</span> Four matched examples begin from the same real test zeros. REGIS (left), MMSFM (centre) and MMtSBM (right) follow the same continuous playback clock through ten digit transitions.</figcaption>

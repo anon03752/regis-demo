@@ -836,6 +836,10 @@ ol.refs li:target .t { background: rgba(192, 156, 24, 0.18); }
   font-weight: 700;
   font-variant-numeric: tabular-nums;
 }
+.demo.mnist .clock-sub { font-variant-numeric: tabular-nums; }
+.demo.mnist .clock-metric { display: inline-block; white-space: nowrap; }
+.demo.mnist .clock-number { display: inline-block; text-align: right; }
+.demo.mnist .clock-padding { visibility: hidden; }
 /* Ten pips, one per digit position: filled behind the cycle, gold at the
    position the rule is working on now. */
 .pip-row { display: flex; gap: 4px; margin-top: 10px; }

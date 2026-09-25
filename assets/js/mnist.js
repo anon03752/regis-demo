@@ -334,15 +334,31 @@
     g.putImageData(im, 0, 0);
   }
 
+  // Tabular digits alone still shift the following text at 9 -> 10, etc.
+  // Reserve number columns and the plural suffix to keep each label steady.
+  function clockNumber(value, digits) {
+    return '<span class="clock-number" style="min-width:' + digits + 'ch">' + value + '</span>';
+  }
+
+  function clockCount(value, label, digits) {
+    return '<span class="clock-metric">' + clockNumber(value, digits) + ' ' + label
+      + (value === 1 ? '<span class="clock-padding" aria-hidden="true">s</span>' : 's') + '</span>';
+  }
+
   function readout() {
     var per = S.perCycle, spt = S.man.steps_per_transition;
     var cycles = Math.floor(S.steps / per);
     var within = S.steps % per;
-    el.cycles.textContent = cycles + (cycles === 1 ? ' full cycle' : ' full cycles');
-    el.sub.textContent = S.steps === 0
-      ? (S.origin === 'drawn' ? 'your digit, nothing run yet' : 'a real test digit, nothing run yet')
-      : Math.floor(S.steps / spt) + (Math.floor(S.steps / spt) === 1 ? ' digit transition · ' : ' digit transitions · ') + S.steps
-        + (S.steps === 1 ? ' update · ' : ' updates · ') + within + '/' + per + ' through the current cycle';
+    el.cycles.innerHTML = clockCount(cycles, 'full cycle', 3);
+    if (S.steps === 0) {
+      el.sub.textContent = S.origin === 'drawn'
+        ? 'your digit, nothing run yet' : 'a real test digit, nothing run yet';
+    } else {
+      el.sub.innerHTML = clockCount(Math.floor(S.steps / spt), 'digit transition', 5)
+        + ' · ' + clockCount(S.steps, 'update', 6)
+        + ' · <span class="clock-metric">' + clockNumber(within, String(per - 1).length)
+        + '/' + per + ' through the current cycle</span>';
+    }
     // Ten pips, one per digit position, filling as the cycle progresses.
     var done = Math.floor(within / spt);
     for (var i = 0; i < el.ring.children.length; i++) {

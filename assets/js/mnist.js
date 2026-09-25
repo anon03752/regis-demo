@@ -124,17 +124,11 @@
       showSpeed();
       sampleDigit();           // open on a real digit, not an empty grid
     }).catch(function (e) {
-      // fetch() is refused for local files, so opening index.html straight
-      // from disk fails right here and nowhere else obvious. Say that,
-      // rather than leaving the reader with a bare "Failed to fetch".
-      var local = location.protocol === 'file:';
-      setStatus(local ? 'needs a web server' : 'failed: ' + e.message);
+      setStatus('failed: ' + e.message);
       el.load.disabled = false;
       el.load.hidden = false;
-      el.gate.querySelector('p').textContent = local
-        ? 'A browser will not read a model out of a file:// page. Serve the '
-          + 'folder \u2014 python3 -m http.server \u2014 and reload. The figure above shows the same cycle.'
-        : 'The rule could not be loaded (' + e.message + '). The figure above shows the same cycle.';
+      el.gate.querySelector('p').textContent = 'The rule could not be loaded ('
+        + e.message + '). The figure above shows the same cycle.';
     });
   }
 
@@ -347,8 +341,8 @@
     el.cycles.textContent = cycles + (cycles === 1 ? ' full cycle' : ' full cycles');
     el.sub.textContent = S.steps === 0
       ? (S.origin === 'drawn' ? 'your digit, nothing run yet' : 'a real test digit, nothing run yet')
-      : Math.floor(S.steps / spt) + ' digit transitions · ' + S.steps
-        + ' updates · ' + within + '/' + per + ' through the current cycle';
+      : Math.floor(S.steps / spt) + (Math.floor(S.steps / spt) === 1 ? ' digit transition · ' : ' digit transitions · ') + S.steps
+        + (S.steps === 1 ? ' update · ' : ' updates · ') + within + '/' + per + ' through the current cycle';
     // Ten pips, one per digit position, filling as the cycle progresses.
     var done = Math.floor(within / spt);
     for (var i = 0; i < el.ring.children.length; i++) {

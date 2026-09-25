@@ -117,8 +117,8 @@
 <line x1="472" y1="156.0" x2="510" y2="156.0" stroke="#6b6b70" stroke-width="1.4" marker-end="url(#ar)"/>
 <rect x="520" y="46" width="220" height="220" fill="#f7f7f5" stroke="#dcdcd8"/>
 <text x="14" y="22" font-size="9.06" font-weight="700" fill="#212228">The data: a cycle of unpaired samples</text>
-<text x="14" y="38" font-size="8.42" fill="#6b6b70">a bag of samples from each marginal with no connections between them</text>
-<text x="520" y="22" font-size="9.06" font-weight="700" fill="#212228">The simulation</text>
-<text x="520" y="38" font-size="8.42" fill="#6b6b70">one sample through time</text>
-<text x="520" y="284" font-size="7.45" fill="#8a6f0c">every frame is a state the rule produced</text>
+<text x="14" y="38" font-size="8.42" fill="#6b6b70">A bag of samples from each marginal with no connections between them</text>
+<text x="520" y="22" font-size="9.06" font-weight="700" fill="#212228">The transition simulation</text>
+<text x="520" y="38" font-size="8.42" fill="#6b6b70">One sample through time</text>
+<!-- <text x="520" y="284" font-size="7.45" fill="#8a6f0c">every frame is a state the rule produced</text> -->
 </svg>

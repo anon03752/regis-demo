@@ -93,12 +93,13 @@
     current: null, painted: null,
     injured: false, hours: 0, leg: 0, stepInLeg: 0, steps: 0,
     playing: false, stepping: false, painting: false,
+    resumeTimer: 0, revision: 0, playback: 0,
     brush: 3, sps: 20, timer: 0, ctx: null, plot: {}, trace: []
   };
 
   var el = {};
   ['status', 'gate', 'load', 'canvas', 'now', 'sub', 'tps', 'seed',
-   'play', 'step', 'injure', 'reset', 'stop', 'legend',
+   'play', 'step', 'injure', 'reset', 'stop', 'legend', 'details',
    'plot-a', 'plot-b'].forEach(function (k) {
     el[k] = document.getElementById('d-' + k);
   });
@@ -169,17 +170,11 @@
       wireRunControls();
       setStatus('ready');
     }).catch(function (e) {
-      // fetch() is refused for local files, so opening index.html straight
-      // from disk fails right here and nowhere else obvious. Say that,
-      // rather than leaving the reader with a bare "Failed to fetch".
-      var local = location.protocol === 'file:';
-      setStatus(local ? 'needs a web server' : 'failed: ' + e.message);
+      setStatus('failed: ' + e.message);
       el.load.disabled = false;
       el.load.hidden = false;
-      el.gate.querySelector('p').textContent = local
-        ? 'A browser will not read a model out of a file:// page. Serve the '
-          + 'folder \u2014 python3 -m http.server \u2014 and reload. The figures above show the same experiments.'
-        : 'The model could not be loaded (' + e.message + '). The figures above show the same experiments.';
+      el.gate.querySelector('p').textContent = 'The model could not be loaded ('
+        + e.message + '). The figures above show the same experiments.';
     });
   }
 
@@ -205,6 +200,8 @@
   }
 
   function resetHeart() {
+    cancelAutoPlay();
+    S.revision += 1;
     S.current = Float32Array.from(seedView(S.seedIdx));
     S.painted = new Uint8Array(S.H * S.W);
     S.injured = false; S.hours = 0; S.leg = 0; S.stepInLeg = 0; S.steps = 0;
@@ -212,6 +209,8 @@
     S.trace = [];
     renderClock();
     render();
+    drawTrace();
+    setStatus(S.playing ? 'running' : 'ready');
   }
 
   /* ------------------------------------------------------------- wounding ---
@@ -261,6 +260,7 @@
         if (woundBin(rr * S.W + cc)) any = true;
       }
     }
+    if (any) S.revision += 1;
     startClockIfNeeded(any);
     renderClock();
     render();
@@ -320,12 +320,20 @@
   function amputateApex() {
     var bins = shapedWound();
     if (!bins) { setStatus('no apex annotation for this section'); return; }
+    pause();
+    S.revision += 1;
     var any = false;
     for (var i = 0; i < bins.length; i++) if (woundBin(bins[i])) any = true;
     startClockIfNeeded(any);
     renderClock();
     render();
-    if (!S.playing) togglePlay();
+    drawTrace();
+    // Leave the removed tissue visible before the first regeneration update.
+    setStatus('cut made');
+    S.resumeTimer = setTimeout(function () {
+      S.resumeTimer = 0;
+      togglePlay();
+    }, 500);
   }
 
   /* ---------------------------------------------------------------- clock ---
@@ -349,7 +357,7 @@
           // screen, which is the state the paper's readout is taken at.
           S.stopped = true;
           pause();
-          setStatus('stopped at 28 dpa + ' + HOLD_AFTER + ' steps');
+          setStatus('paused at 28 days');
           return;
         }
         // Otherwise the rule keeps running indefinitely from the state it
@@ -362,7 +370,7 @@
         // clears them (see startClockIfNeeded).
         S.injured = false; S.stopped = false;
         S.hours = 0; S.leg = 0; S.stepInLeg = 0; S.held = 0;
-        setStatus('uninjured — tracks held until the next injury');
+        setStatus('cycle complete');
         return;
       }
     }
@@ -379,32 +387,34 @@
   }
 
   function fmtTime(h) {
-    if (h < 24) return (Math.round(h * 10) / 10) + ' hpa';
+    if (h < 24) {
+      var hours = Math.round(h * 10) / 10;
+      return hours + (hours === 1 ? ' hour' : ' hours');
+    }
     var d = h / 24;
-    return (d < 10 ? Math.round(d * 10) / 10 : Math.round(d)) + ' dpa';
+    var days = d < 10 ? Math.round(d * 10) / 10 : Math.round(d);
+    return days + (days === 1 ? ' day' : ' days');
   }
 
   function renderClock() {
     var m = S.manifest;
     if (!S.injured) {
-      el.now.textContent = 'uninjured';
-      el.sub.textContent = 'not injured yet — the clock starts at the first damaged bin';
+      el.now.textContent = 'Uninjured';
+      el.sub.textContent = 'Ready for an injury';
     } else {
       el.now.textContent = fmtTime(S.hours);
       var atEnd = S.leg >= m.leg_hours.length - 1;
       el.sub.textContent = atEnd
-        ? 'held at ' + m.stage_names[m.stage_names.length - 1] + ' — regenerated, '
-          + (S.stopped ? 'stopped here' : 'still stepping')
-        : 'traversing ' + m.stage_names[S.leg] + ' → ' + m.stage_names[S.leg + 1]
-          + '  ·  step ' + S.stepInLeg + '/' + m.steps_per_leg
-          + '  ·  ' + S.steps + ' updates';
+        ? (S.stopped ? 'After injury · paused' : 'After injury · completing the cycle')
+        : 'After injury';
     }
     var html = '';
     for (var i = 0; i < m.stage_names.length; i++) {
       var reached = S.injured && S.hours >= m.stage_hours[i] - 1e-6;
       var target = S.injured && i === Math.min(S.leg + 1, m.stage_names.length - 1);
       html += '<span class="tp' + (reached ? ' reached' : '')
-            + (target ? ' target' : '') + '">' + m.stage_names[i] + '</span>';
+            + (target ? ' target' : '') + '">'
+            + (i === 0 ? 'Uninjured' : fmtTime(m.stage_hours[i])) + '</span>';
     }
     el.tps.innerHTML = html;
   }
@@ -420,12 +430,15 @@
   function runStep() {
     if (S.stepping || !S.session) return Promise.resolve();
     S.stepping = true;
+    var revision = S.revision;
     var feeds = { state: new ort.Tensor('float32', S.current, [1, S.C, S.H, S.W]) };
     if (S.hasDt) {
       var dt = currentDt();
       if (dt !== null) feeds.dt = new ort.Tensor('float32', new Float32Array([dt]), [1]);
     }
     return S.session.run(feeds).then(function (out) {
+      // A cut or reset made during inference supersedes that older state.
+      if (revision !== S.revision) return;
       S.current = new Float32Array(out.next_state.data);
       S.steps += 1;
       // Nothing is being measured while the heart sits uninjured, and the rule
@@ -447,8 +460,8 @@
       render();
       drawTrace();
     }).catch(function (e) {
-      setStatus('step failed: ' + e.message);
       pause();
+      setStatus('step failed: ' + e.message);
     }).then(function () { S.stepping = false; });
   }
 
@@ -483,11 +496,12 @@
    * hundred points, and it cannot drift out of step with the simulation the
    * way an incrementally-drawn trace would after a reset. */
   function initPlots() {
+    if (el.details && !el.details.open) return;
     TRACKED.forEach(function (key) {
       var cv = el['plot-' + key.toLowerCase()];
       if (!cv) return;
       cv.width = Math.max(cv.clientWidth, 1) * 2;
-      cv.height = 104;
+      cv.height = Math.max(cv.clientHeight, 52) * 2;
       S.plot[key] = cv.getContext('2d');
     });
   }
@@ -507,6 +521,7 @@
   }
 
   function drawTrace() {
+    if (el.details && !el.details.open) return;
     var pal = S.manifest.palette, spl = S.manifest.steps_per_leg;
     GROUPS.forEach(function (grp) {
       if (TRACKED.indexOf(grp.key) < 0) return;
@@ -554,9 +569,10 @@
    * runs back-to-back instead of queueing up. */
   function pump() {
     if (!S.playing) return;
+    var playback = S.playback;
     var started = performance.now();
     runStep().then(function () {
-      if (!S.playing) return;
+      if (!S.playing || playback !== S.playback) return;
       var wait = Math.max(0, 1000 / S.sps - (performance.now() - started));
       S.timer = setTimeout(pump, wait);
     });
@@ -648,30 +664,37 @@
   function buildLegend() {
     var names = S.manifest.channels, pal = S.manifest.palette, html = '';
     GROUPS.forEach(function (g) {
-      var traced = TRACKED.indexOf(g.key) >= 0;
-      html += '<div class="legend-group-label" style="grid-column:1/-1;'
-           +  'font-size:10.5px;color:#6b6b70;margin:7px 0 1px">'
-           +  (traced ? '<i class="trace-key" style="background:' + g.colour
-                        + '"></i>' : '')
-           +  '<b style="color:#212228">' + g.name + '</b> &middot; ' + g.tag
-           +  '</div>';
+      html += '<div class="legend-group"><div class="legend-group-label"><b>'
+           + g.name + '</b></div><div class="legend-items">';
       g.ids.forEach(function (i) {
         var nm = shortName(names[i]), c = pal[i];
         html += '<span class="legend-item" title="' + (FULL_NAME[nm] || nm) + '">'
              + '<i style="background:rgb(' + c[0] + ',' + c[1] + ',' + c[2] + ')"></i>'
              + '<span class="nm">' + nm + '</span></span>';
       });
+      html += '</div></div>';
     });
     el.legend.innerHTML = html;
   }
 
+  function cancelAutoPlay() {
+    clearTimeout(S.resumeTimer);
+    S.resumeTimer = 0;
+  }
+
   function togglePlay() {
+    cancelAutoPlay();
+    S.playback += 1;
     S.playing = !S.playing;
     el.play.innerHTML = S.playing ? '&#10073;&#10073;&ensp;Pause' : '&#9654;&ensp;Play';
+    setStatus(S.playing ? 'running' : (S.stopped ? 'paused at 28 days' : 'paused'));
     if (S.playing) pump(); else clearTimeout(S.timer);
   }
 
-  function pause() { if (S.playing) togglePlay(); }
+  function pause() {
+    cancelAutoPlay();
+    if (S.playing) togglePlay();
+  }
 
   function canvasToBin(ev) {
     var r = el.canvas.getBoundingClientRect();
@@ -682,7 +705,7 @@
 
   function wireRunControls() {
     el.play.addEventListener('click', togglePlay);
-    el.step.addEventListener('click', function () { runStep(); });
+    el.step.addEventListener('click', function () { cancelAutoPlay(); runStep(); });
     el.injure.addEventListener('click', amputateApex);
     el.reset.addEventListener('click', resetHeart);
 
@@ -695,6 +718,7 @@
     // setPointerCapture keeps a drag alive if it leaves the canvas.
     el.canvas.addEventListener('pointerdown', function (ev) {
       ev.preventDefault();
+      cancelAutoPlay();
       S.painting = true;
       el.canvas.setPointerCapture(ev.pointerId);
       var b = canvasToBin(ev);
@@ -716,6 +740,11 @@
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(function () { initPlots(); drawTrace(); }, 150);
     });
+    if (el.details) {
+      el.details.addEventListener('toggle', function () {
+        if (el.details.open) { initPlots(); drawTrace(); }
+      });
+    }
 
     // Pause when the widget scrolls out of view: there is no reason to spend
     // the reader's CPU on a simulation they cannot see.
@@ -731,7 +760,7 @@
   el.load.addEventListener('click', boot);
   if (el.gate) {
     var gp = el.gate.querySelector('p');
-    if (gp) gp.textContent = 'Loading the learned rule and 16 real uninjured heart sections\u2026';
+    if (gp) gp.textContent = 'Loading the heart simulation\u2026';
     el.load.hidden = true;
   }
   boot();

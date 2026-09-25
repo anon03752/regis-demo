@@ -1,0 +1,978 @@
+/* REGIS project page.
+   Layout follows the Distill-derived research-blog convention: one 916px
+   column of justified body text, headings that carry the hierarchy by size
+   alone, figures allowed to break wider than the text, and a right-hand
+   gutter for sidenotes that collapses into inline popovers on narrow screens.
+   Colours are sampled from Figure 1 so the page and the figures agree:
+   blue = observed data, gold = simulated trajectory. */
+
+:root {
+  --col: 916px;             /* the text column, and the 1x width of a figure */
+  --ink: rgba(0, 0, 0, 0.87);
+  --ink-muted: rgba(0, 0, 0, 0.55);
+  --ink-faint: rgba(0, 0, 0, 0.35);
+  --rule: rgba(0, 0, 0, 0.1);
+  --rule-strong: rgba(0, 0, 0, 0.22);
+  --wash: rgba(0, 0, 0, 0.025);
+  --blue: #30489c;          /* observations */
+  --gold: #c09c18;          /* simulated / REGIS */
+  --sans: -apple-system, system-ui, "Segoe UI", Roboto, Oxygen, Ubuntu,
+          Cantarell, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: #fff;
+  color: var(--ink);
+  font: 400 17px/28px var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------------------------------------------------------------- grid ---
+   Every direct child of <article> is centred at one of three widths. Figures
+   opt into the wider ones; prose never does. */
+
+article { padding: 0 24px 120px; }
+
+article > *,
+.l-body {
+  width: 100%;
+  max-width: var(--col);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Wide figure: breaks out of the text column when the viewport allows. */
+.l-page { max-width: 1180px; }
+
+/* Narrow figure, centred: for small single-panel plots. */
+.l-middle { max-width: 620px; }
+
+/* ------------------------------------------------------------- masthead --- */
+
+.site-head {
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 56px;
+}
+.site-head > div {
+  max-width: var(--col);
+  margin: 0 auto;
+  padding: 18px 24px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+h1 {
+  font-size: 36px;
+  line-height: 42px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0 auto 10px;
+}
+.subtitle {
+  /* The second line of the title, not a caption for it: same face, same
+     tracking, same colour -- carried by size rather than by weight. */
+  font-size: 28px;
+  line-height: 36px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: #000;
+  margin: 0 auto 6px;
+  text-align: left;
+}
+
+/* ------------------------------------------------------------- typography --- */
+
+h2 {
+  font-size: 28px;
+  line-height: 34px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 72px auto 16px;
+}
+h3 {
+  font-size: 21px;
+  line-height: 28px;
+  font-weight: 700;
+  margin: 40px auto 12px;
+}
+h4 {
+  font-size: 17px;
+  line-height: 24px;
+  font-weight: 700;
+  margin: 28px auto 8px;
+}
+
+p { margin: 0 auto 17px; text-align: justify; }
+ul, ol { margin: 0 auto 17px; padding-left: 26px; }
+li { margin-bottom: 6px; }
+
+a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule-strong);
+}
+a:hover { border-bottom-color: currentColor; text-decoration: none; }
+
+strong { font-weight: 700; }
+em { font-style: italic; }
+code { font: 400 0.88em/1.4 var(--mono); background: var(--wash); padding: 1px 4px; border-radius: 2px; }
+
+hr { border: 0; border-top: 1px solid var(--rule); margin: 56px auto; }
+
+/* A short standfirst under a heading: the claim, before the evidence. */
+.lede { color: var(--ink-muted); }
+
+/* Pull-quote sized statement of a result. */
+.claim {
+  border-left: 3px solid var(--gold);
+  padding: 2px 0 2px 18px;
+  margin: 28px auto;
+  font-size: 19px;
+  line-height: 29px;
+}
+.claim p { text-align: left; margin-bottom: 0; }
+
+/* Three-up card row, used for the locality / Markov / time-invariance trio. */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin: 28px auto 34px;
+}
+.card {
+  border: 1px solid var(--rule);
+  border-top: 2px solid var(--blue);
+  border-radius: 2px;
+  padding: 16px 18px 18px;
+}
+.card h4 { margin: 0 0 6px; font-size: 15px; letter-spacing: 0.01em; }
+.card p { font-size: 14px; line-height: 22px; text-align: left; margin: 0 0 10px; }
+.card p:last-child { margin-bottom: 0; }
+.card .forbids { color: var(--ink-muted); font-size: 13px; line-height: 20px; }
+
+/* ---------------------------------------------------------------- figures --- */
+
+figure { margin: 40px auto 44px; }
+figure img, figure svg.plot, figure object { display: block; width: 100%; height: auto; }
+figure a.zoom { display: block; border: 0; cursor: zoom-in; }
+figcaption {
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--ink-muted);
+  text-align: left;
+  margin-top: 12px;
+  max-width: var(--col);
+}
+.l-page figcaption { margin-left: auto; margin-right: auto; }
+/* A caption that is a direct child of the article belongs to the block above
+   it (a table, the demo widget) and needs its own trailing space. */
+article > figcaption { margin-bottom: 26px; }
+figcaption .lbl { color: var(--ink); font-weight: 700; }
+figcaption b { color: var(--ink); }
+
+/* --------------------------------------------------------------- hero video ---
+   Three square groups in a row with no borders, separated by the video's own
+   grey field. The labels sit above the groups in a grid whose columns match the
+   video's geometry exactly: the frame is 1480 wide as 3 x 480 with two 20px
+   gutters, so a gap of 20/1480 = 1.351% leaves three columns of 32.43% each,
+   which is precisely where the groups are. */
+
+figure.hero { margin: 24px auto 34px; }
+
+.hero video {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #fff;
+}
+.hero-labels {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.351%;
+  margin-bottom: 8px;
+}
+.hero-labels span {
+  font-size: 11.5px;
+  line-height: 15px;
+  letter-spacing: 0.02em;
+  color: var(--ink-muted);
+}
+
+@media (max-width: 700px) {
+  /* Three labels will not fit across a phone; the caption names the groups in
+     order instead. */
+  .hero-labels { display: none; }
+}
+
+/* -------------------------------------------------------------- cycle figure ---
+   One drawn image with a single moving part. The SVG leaves an empty panel for
+   the trajectory and the video is laid into exactly that rect, in percentages
+   of the viewBox (764 x 306, slot at 520,46,220,220), so the video tracks the
+   drawing at any width instead of being a second thing sitting beside it.
+   tools/make-cycle-figure.py prints these numbers when it regenerates. */
+
+figure.cycle { margin: 30px auto 40px; }
+
+.mnist-comparison video {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #fff;
+}
+
+.cycle-frame { position: relative; }
+.cycle-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.cycle-spot {
+  position: absolute;
+  left: -100px;
+  top: 0;
+  width: 11px;
+  height: 11px;
+  margin: -5.5px 0 0 -5.5px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 0 2px #fff;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cycle-spot { display: none; }
+}
+.cycle-video {
+  position: absolute;
+  left: 68.0628%;
+  top: 15.0327%;
+  width: 28.7958%;
+  height: 71.8954%;
+  object-fit: cover;
+}
+
+/* --------------------------------------------------------------- ising figure ---
+   Same idea as the cycle figure: one drawing, with the only moving parts laid
+   over it at rects the SVG left for them. The percentages are the SVG's own
+   viewBox coordinates divided by its width and height, printed by
+   tools/make-ising-figure.py -- so the overlays track the drawing at any page
+   width and there is nothing to keep in sync by hand.
+
+   The training crop and the spot are DOM elements rather than SVG shapes
+   because the drawing is loaded as an <img>: the page cannot reach inside it,
+   and the crop has to sit above the video anyway. */
+.ising-frame { position: relative; }
+.ising-frame img { display: block; width: 100%; height: auto; }
+.ising-video {
+  position: absolute;
+  left: 67.7966%;
+  top: 13.4783%;
+  width: 27.9661%;
+  height: 71.7391%;
+  object-fit: cover;
+}
+.ising-crop {
+  position: absolute;
+  left: 70.0000%;
+  top: 19.1304%;
+  width: 6.9915%;
+  height: 17.9348%;
+  /* Grey, matching the one drawn into the SVG underneath, with a hairline
+     light ring so it stays legible over the dark domains too. */
+  border: 1px dashed #9a9a9e;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.45);
+  pointer-events: none;
+}
+/* Parked off-figure until the track loads, so a failed fetch shows nothing
+   rather than a dot stuck at the origin claiming t = 0. */
+.ising-spot {
+  position: absolute;
+  left: -100px;
+  top: 0;
+  width: 9px;
+  height: 9px;
+  margin: -4.5px 0 0 -4.5px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 0 2px #fff;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ising-spot { display: none; }
+}
+
+/* --------------------------------------------------------------- heart figure ---
+   Same overlay idiom as the cycle and Ising figures: percentages are the
+   SVG's own viewBox rect divided by its size, printed by
+   tools/make-heart-figure.py. */
+.heart-frame { position: relative; }
+.heart-frame img { display: block; width: 100%; height: auto; }
+.heart-video {
+  position: absolute;
+  left: 71.1864%;
+  top: 21.3710%;
+  width: 27.1186%;
+  height: 64.5161%;
+  object-fit: cover;
+}
+.heart-spot {
+  position: absolute;
+  left: -100px;
+  top: 0;
+  width: 11px;
+  height: 11px;
+  margin: -5.5px 0 0 -5.5px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 0 2px #fff;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .heart-spot { display: none; }
+}
+
+/* ------------------------------------------------------------ perturb figure ---
+   Two read-out dots on one track file, gold for the unperturbed run and red
+   for the perturbed one; same overlay idiom as the heart and Ising figures. */
+.perturb-frame { position: relative; }
+.perturb-frame img { display: block; width: 100%; height: auto; }
+/* The cascade plots are real SVG over the drawing, not pixels inside the
+   video: the traces are revealed by animating stroke-dashoffset, so they stay
+   sharp and read as a graph rather than as a film of one. */
+.perturb-plots {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.perturb-video {
+  position: absolute;
+  left: 33.8983%;
+  top: 13.4921%;
+  width: 62.7119%;
+  height: 47.1458%;
+  object-fit: fill;
+}
+.perturb-gold, .perturb-blue, .perturb-red {
+  position: absolute;
+  left: -100px;
+  top: 0;
+  width: 11px;
+  height: 11px;
+  margin: -5.5px 0 0 -5.5px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px #fff;
+  pointer-events: none;
+}
+.perturb-gold { background: var(--gold); }
+.perturb-blue { background: var(--blue); }
+.perturb-red { background: #c0392b; }
+@media (prefers-reduced-motion: reduce) {
+  .perturb-gold, .perturb-blue, .perturb-red { display: none; }
+}
+
+/* ------------------------------------------------------------- scheme figure ---
+   One drawing, three views. Every state is in the SVG; these rules decide what
+   is visible, and the two positions of the generated distribution cross-fade so
+   the matching reads as motion rather than as a jump. The SVG is inlined into
+   the page precisely so this stylesheet can reach its groups. */
+
+figure.scheme { margin: 32px auto 40px; }
+
+.scheme-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 4px;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 4px;
+}
+.scheme-tabs button {
+  font: 400 13px/1 var(--sans);
+  background: none;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  padding: 8px 12px;
+  margin-bottom: -1px;
+  color: var(--ink-muted);
+  cursor: pointer;
+}
+.scheme-tabs button:hover { color: var(--ink); }
+.scheme-tabs button[aria-selected="true"] {
+  color: var(--ink);
+  font-weight: 700;
+  border-bottom-color: var(--gold);
+}
+
+.scheme-art svg { display: block; width: 100%; height: auto; }
+
+/* The switchable groups. Which of them is visible is set by post.js as an
+   inline opacity -- the cascade here only supplies the cross-fade and the
+   no-JS default, which is the generator view. Opacity rather than display, so
+   the fade works and the layout never moves. */
+.scheme-art .s-panel,
+.scheme-art .s-disc,
+.scheme-art .s-gen-call,
+.scheme-art .s-apart,
+.scheme-art .s-near {
+  transition: opacity 0.45s ease;
+}
+.scheme-art .s-panel-disc,
+.scheme-art .s-panel-app,
+.scheme-art .s-disc,
+.scheme-art .s-near { opacity: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .scheme-art .s-panel, .scheme-art .s-disc, .scheme-art .s-gen-call,
+  .scheme-art .s-apart, .scheme-art .s-near { transition: none; }
+}
+
+@media (max-width: 760px) {
+  .scheme-tabs button { padding: 8px 8px; font-size: 12.5px; }
+}
+
+/* Full-screen figure zoom. */
+#lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.97);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  z-index: 100;
+  cursor: zoom-out;
+  overflow: auto;
+}
+#lightbox.on { display: flex; }
+#lightbox img, #lightbox svg { max-width: 100%; max-height: 100%; }
+
+/* ----------------------------------------------------------------- tables --- */
+
+.table-wrap { overflow-x: auto; margin: 32px auto 12px; }
+table {
+  border-collapse: collapse;
+  font-size: 14px;
+  line-height: 20px;
+  width: 100%;
+}
+caption { caption-side: bottom; }
+th, td { padding: 7px 12px; text-align: right; white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+thead th { font-weight: 700; }
+table .grouphead { font-weight: 400; color: var(--ink-muted); font-size: 12px; }
+.mnist-results .grouphead {
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  padding-bottom: 9px;
+  border-bottom: 1px solid var(--rule-strong);
+}
+.mnist-results thead th[rowspan] {
+  vertical-align: bottom;
+  border-bottom: 1px solid var(--ink);
+}
+.mnist-results thead tr:last-child th { text-align: right; }
+table thead tr:last-child th { border-bottom: 1px solid var(--ink); }
+table tbody tr:last-child td { border-bottom: 1px solid var(--ink); }
+table tbody tr.best td { background: rgba(192, 156, 24, 0.07); }
+td .range { display: block; font-size: 11.5px; line-height: 15px; color: var(--ink-muted); }
+.rule-top th { border-top: 1px solid var(--ink); }
+
+.method-info {
+  margin-left: 3px;
+  padding: 4px 2px;
+  border: 0;
+  background: none;
+  color: var(--blue);
+  font: 400 11px/1.2 var(--sans);
+  vertical-align: 1px;
+  cursor: pointer;
+}
+.method-info:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ------------------------------------------------------ notes & citations --- */
+
+/* Inline references become compact groups such as [5, 6] when JS loads. */
+a.cite {
+  border: 0;
+  font-size: 12.5px;
+  vertical-align: 0.35em;
+  line-height: 1;
+  color: var(--blue);
+  padding: 0 1px;
+}
+a.cite:focus-visible, .cite-tooltip a:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.cite-group {
+  margin: 0 2px;
+  color: hsla(206, 90%, 20%, 0.75);
+  font-size: 12.5px;
+  line-height: 1;
+  vertical-align: 0.15em;
+  white-space: nowrap;
+}
+.cite-group a.cite {
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+  vertical-align: baseline;
+}
+
+/* Bibliography previews follow the compact Distill/Sakana reading style.
+   The outer padding connects the marker to the card; its contents scroll
+   independently when a group of references is taller than the space available. */
+.cite-tooltip {
+  position: fixed;
+  z-index: 90;
+  width: max-content;
+  max-width: min(640px, calc(100vw - 32px));
+  padding-top: 8px;
+  color: var(--ink);
+  font: 400 14px/21px var(--sans);
+  text-align: left;
+  white-space: normal;
+}
+.cite-tooltip[hidden] { display: none; }
+.cite-tooltip[data-side="above"] { padding: 0 0 8px; }
+.cite-tooltip-card {
+  display: block;
+  padding: 16px 18px;
+  max-height: var(--cite-max-height, calc(100vh - 40px));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: 1px solid rgba(0, 0, 0, 0.22);
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 2px 12px 2px rgba(0, 0, 0, 0.15);
+  overflow-wrap: anywhere;
+}
+.cite-entry, .cite-tooltip .t,
+.cite-tooltip .ref-authors, .cite-tooltip .ref-publication,
+.cite-tooltip-sources {
+  display: block;
+}
+.cite-entry + .cite-entry { margin-top: 16px; }
+.cite-tooltip .t { margin-bottom: 2px; font-weight: 700; }
+.cite-tooltip .ref-authors, .cite-tooltip .ref-publication { color: #56565c; }
+.cite-tooltip-sources { margin-top: 2px; }
+.method-tooltip { width: min(380px, calc(100vw - 24px)); }
+.method-tooltip .t { margin-bottom: 6px; }
+.method-description { display: block; color: #56565c; }
+.method-reference {
+  display: block;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--rule);
+  color: #56565c;
+  font-size: 12px;
+  line-height: 18px;
+}
+.method-reference .method-paper { display: block; margin-top: 3px; }
+.method-reference a.cite { font-size: inherit; vertical-align: baseline; text-decoration: none; }
+.cite-tooltip a {
+  color: #004276;
+  border: 0;
+  text-decoration: underline;
+  text-decoration-color: rgba(0, 66, 118, 0.25);
+  text-underline-offset: 2px;
+}
+.cite-tooltip a:hover { text-decoration-color: currentColor; }
+@media (max-width: 600px) {
+  .cite-tooltip { max-width: calc(100vw - 24px); font-size: 13px; line-height: 20px; }
+  .cite-tooltip-card { padding: 12px 14px; }
+}
+
+/* Reference list. */
+ol.refs { list-style: none; padding: 0; counter-reset: ref; font-size: 14px; line-height: 21px; }
+ol.refs li {
+  counter-increment: ref;
+  position: relative;
+  padding-left: 34px;
+  margin-bottom: 12px;
+  color: var(--ink-muted);
+}
+ol.refs li::before {
+  content: "[" counter(ref) "]";
+  position: absolute;
+  left: 0;
+  color: var(--ink-faint);
+  font-size: 12.5px;
+}
+ol.refs li .t { color: var(--ink); }
+ol.refs li:target .t { background: rgba(192, 156, 24, 0.18); }
+
+/* -------------------------------------------------------------------- math --- */
+/* The twenty formulas on this page are variables, superscripts and four
+   operators. That does not need a typesetting engine, so they are plain
+   HTML and the page loads no math library at all. Variables are italic, the
+   rest is the body face, and a formula never breaks across a line. */
+.m { white-space: nowrap; }
+.m i { font-style: italic; }
+.m sup, .m sub { font-size: 0.72em; line-height: 0; }
+
+/* --------------------------------------------------------- table of contents --- */
+
+#toc {
+  /* `top` and `max-height` are set from JS so the list never rides higher
+     than the title it belongs to -- see buildToc(). 28px is the resting
+     offset once the title has scrolled away. */
+  position: fixed;
+  top: 28px;
+  left: 0;
+  width: 220px;
+  max-height: calc(100vh - 44px);
+  overflow-y: auto;
+  padding: 0 16px 28px 24px;
+  font-size: 12.5px;
+  line-height: 17px;
+  display: none;
+}
+#toc a {
+  display: block;
+  border: 0;
+  color: var(--ink-faint);
+  padding: 4px 0;
+}
+#toc a:hover { color: var(--ink); }
+#toc a.h3 { padding-left: 12px; font-size: 12px; }
+#toc a.on { color: var(--ink); font-weight: 700; }
+@media (min-width: 1500px) { #toc { display: block; } }
+
+/* --------------------------------------------------------------- responsive --- */
+
+@media (max-width: 760px) {
+  body { font-size: 16px; line-height: 26px; }
+  p { text-align: left; }
+  h1 { font-size: 28px; line-height: 34px; }
+  .subtitle { font-size: 21px; line-height: 28px; }
+  h2 { font-size: 23px; line-height: 29px; margin-top: 52px; }
+  h3 { font-size: 19px; line-height: 26px; }
+  article { padding: 0 20px 80px; }
+  .cards { grid-template-columns: 1fr; gap: 12px; }
+  .claim { font-size: 17px; line-height: 26px; }
+  /* Display math does not reflow, so shrink it rather than leaving the reader
+     to scroll a formula sideways. `.eq` keeps overflow-x as the backstop. */
+  .eq .katex-display { font-size: 0.86em; }
+}
+
+/* ============================================================== demo widget ===
+   The in-browser NCA. Styled as a page-width card so it reads as part of the
+   article rather than as an embedded tool. */
+
+.demo {
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  background: #fcfcfc;
+  margin: 36px auto 16px;
+  overflow: hidden;
+}
+
+.demo-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--rule);
+  font-size: 13px;
+  color: var(--ink-muted);
+}
+.demo-head b { color: var(--ink); font-size: 14px; }
+.demo-head .spacer { flex: 1; }
+.demo-head .status { font: 400 12px/1.4 var(--mono); color: var(--ink-faint); }
+
+/* Pre-load state: a poster and one button, so nothing downloads unasked. */
+.demo-gate { padding: 40px 24px 44px; text-align: center; }
+.demo-gate p { text-align: center; font-size: 14px; line-height: 21px; color: var(--ink-muted); max-width: 440px; margin: 0 auto 18px; }
+.demo-gate button {
+  font: 600 14px/1 var(--sans);
+  background: var(--ink);
+  color: #fff;
+  border: 0;
+  border-radius: 3px;
+  padding: 11px 20px;
+  cursor: pointer;
+}
+.demo-gate button:hover { background: #000; }
+.demo-gate button:disabled { background: var(--ink-faint); cursor: default; }
+
+.demo-body { display: none; grid-template-columns: minmax(0, 1fr) 272px; }
+.demo.ready .demo-body { display: grid; }
+.demo.ready .demo-gate { display: none; }
+
+.demo-stage { padding: 18px; min-width: 0; }
+/* The "go on, click it" prompt under the canvas. Readers do not expect a
+   figure to be interactive, and the one thing worth steering them towards is
+   where to cut: the atlas only ever amputates the ventricular apex. */
+.demo-hint {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  max-width: 460px;
+  margin: 14px auto 0;
+  padding: 11px 14px 11px 12px;
+  background: rgba(192, 156, 24, 0.07);
+  border: 1px solid rgba(192, 156, 24, 0.3);
+  border-radius: 3px;
+}
+.demo-hint-icon {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid var(--gold);
+  color: var(--gold);
+  display: grid;
+  place-items: center;
+}
+.demo-hint-icon svg { width: 19px; height: 19px; display: block; }
+.demo-hint p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 19px;
+  color: var(--ink-muted);
+  text-align: left;
+}
+.demo-hint p b { color: var(--ink); }
+
+.canvas-wrap {
+  position: relative;
+  background: #f4f4f2;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-width: 460px;
+  margin: 0 auto;
+}
+.canvas-wrap canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+  cursor: crosshair;
+  touch-action: none;
+}
+
+/* The measured-timepoint strip. */
+.clock { max-width: 460px; margin: 14px auto 0; }
+.clock-now { font-size: 15px; font-weight: 700; }
+.clock-sub { font-size: 12px; line-height: 17px; color: var(--ink-muted); min-height: 17px; }
+.tp-row { display: flex; gap: 4px; margin-top: 9px; flex-wrap: wrap; }
+.tp {
+  font-size: 10.5px;
+  line-height: 1;
+  padding: 4px 6px;
+  border-radius: 2px;
+  border: 1px solid var(--rule-strong);
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+.tp.reached { background: rgba(48, 72, 156, 0.1); border-color: rgba(48, 72, 156, 0.35); color: var(--blue); }
+.tp.target { border-color: var(--gold); color: #8a6f0c; background: rgba(192, 156, 24, 0.12); }
+
+/* Controls column. */
+.demo-side {
+  border-left: 1px solid var(--rule);
+  padding: 18px;
+  font-size: 13px;
+  min-width: 0;
+}
+.demo-side h5 {
+  font-size: 11px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 20px 0 8px;
+  font-weight: 700;
+}
+.demo-side h5:first-child { margin-top: 0; }
+.demo-side label { display: block; margin-bottom: 8px; font-size: 12.5px; color: var(--ink-muted); }
+.demo-side select {
+  font: 400 13px var(--sans);
+  width: 100%;
+  padding: 5px 6px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 2px;
+  background: #fff;
+  color: var(--ink);
+}
+.demo-side input[type=range] { width: 100%; margin: 2px 0 0; }
+.demo-side label.chk {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 10px 0 8px;
+  font-size: 12.5px;
+  color: var(--ink);
+  cursor: pointer;
+}
+.demo-side label.chk input { margin: 0; }
+.btn-row { display: flex; gap: 6px; flex-wrap: wrap; }
+.demo button.b {
+  font: 400 13px/1 var(--sans);
+  background: #fff;
+  border: 1px solid var(--rule-strong);
+  border-radius: 2px;
+  padding: 7px 10px;
+  cursor: pointer;
+  color: var(--ink);
+}
+.demo button.b:hover { border-color: var(--ink); }
+.demo button.b.primary { background: var(--ink); border-color: var(--ink); color: #fff; }
+.demo button.b.primary:hover { background: #000; }
+.demo button.b.wide { flex: 1; }
+
+/* The cycling-MNIST widget. Reuses the heart card wholesale; what it adds is
+   the 22x22 guide box strokes are clipped to, and the cycle counter. */
+.demo.mnist .canvas-wrap { max-width: 360px; margin: 0 auto; }
+.demo.mnist #m-draw {
+  background: var(--gold);
+  border-color: #a58718;
+  color: #2b250f;
+  font-weight: 600;
+}
+.demo.mnist #m-draw:hover { background: #ae8b15; border-color: #8f7210; }
+.demo.mnist #m-draw:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}
+.ink-guide {
+  position: absolute;
+  border: 1px dashed var(--rule-strong);
+  pointer-events: none;
+}
+.cycle-count {
+  font-size: 22px;
+  line-height: 28px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+/* Ten pips, one per digit position: filled behind the cycle, gold at the
+   position the rule is working on now. */
+.pip-row { display: flex; gap: 4px; margin-top: 10px; }
+.pip { flex: 1; height: 4px; border-radius: 2px; background: var(--rule); }
+.pip.on { background: var(--ink-faint); }
+.pip.at { background: var(--gold); }
+
+/* Cell-type legend, doubling as the knockout control. */
+.ko-note { font-size: 12px; line-height: 18px; color: var(--ink-muted); margin: 0 0 10px; text-align: left; }
+.legend {
+  grid-column: 1 / -1;
+  border-top: 1px solid var(--rule);
+  padding: 12px 18px 14px;
+}
+.legend-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(112px, 1fr));
+  gap: 1px 8px;
+}
+.legend-grid button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font: 400 12px/1.3 var(--sans);
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  padding: 3px 5px;
+  cursor: pointer;
+  text-align: left;
+  color: var(--ink);
+  width: 100%;
+}
+.legend-grid button:hover { border-color: var(--rule-strong); }
+.legend-grid button i {
+  width: 11px;
+  height: 11px;
+  border-radius: 2px;
+  flex: none;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+}
+.legend-grid button.ko { color: var(--ink-faint); background: rgba(0, 0, 0, 0.05); }
+.legend-grid button.ko .nm { text-decoration: line-through; }
+.legend-grid button.ko i { opacity: 0.3; }
+.legend-grid button.group { grid-column: 1 / -1; }
+.legend-head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.legend-head h5 {
+  font-size: 11px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 0;
+  font-weight: 700;
+}
+.legend-head .spacer { flex: 1; }
+.plot-label {
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  font-weight: 700;
+  margin: 12px 0 4px;
+}
+.traces { margin-top: 16px; }
+.traces canvas { display: block; width: 100%; height: 52px; }
+.plot-label span {
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--ink-faint);
+  margin-left: 6px;
+}
+/* The key for the two groups the plot traces. */
+.legend-group-label i.trace-key {
+  display: inline-block;
+  width: 14px;
+  height: 3px;
+  border-radius: 2px;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+/* The legend is a key now, not a control surface. */
+.legend-grid .legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  line-height: 1.25;
+  padding: 1px 0;
+  color: var(--ink);
+}
+.legend-grid .legend-item i {
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  flex: none;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+}
+
+@media (max-width: 860px) {
+  .demo-body { grid-template-columns: 1fr; }
+  .demo.ready .demo-body { grid-template-columns: 1fr; }
+  .demo-side { border-left: 0; border-top: 1px solid var(--rule); }
+}

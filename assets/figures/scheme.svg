@@ -1,0 +1,189 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 26 1180 516" font-family="-apple-system, system-ui, Segoe UI, Roboto, Helvetica, sans-serif" role="img" aria-label="Time runs left to right. At each of three times the data gives a few unpaired observations, drawn as blue dots, with short dashed stubs through them standing for the trajectory that cannot be observed. Three gold trajectories start on observations and are generated forward by repeating one local update. The generated distribution is shown both apart from the observed one and matched to it.">
+<defs><marker id="s-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#6b6b70"/></marker><marker id="s-arg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#212228"/></marker><linearGradient id="s-fade-b" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#499ecc" stop-opacity="0"/><stop offset="1" stop-color="#499ecc" stop-opacity="0.42"/></linearGradient><linearGradient id="s-fade-g" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#caa42d" stop-opacity="0"/><stop offset="1" stop-color="#caa42d" stop-opacity="0.42"/></linearGradient><linearGradient id="s-tail" gradientUnits="userSpaceOnUse" x1="796" y1="0" x2="1040" y2="0"><stop offset="0" stop-color="#caa42d" stop-opacity="0.95"/><stop offset="0.26" stop-color="#caa42d" stop-opacity="0.28"/><stop offset="0.6" stop-color="#caa42d" stop-opacity="0"/></linearGradient><linearGradient id="s-stub0" gradientUnits="userSpaceOnUse" x1="498" y1="0" x2="622" y2="0"><stop offset="0" stop-color="#7c7c82" stop-opacity="0"/><stop offset="0.22" stop-color="#7c7c82" stop-opacity="0.12"/><stop offset="0.40" stop-color="#7c7c82" stop-opacity="1"/><stop offset="0.60" stop-color="#7c7c82" stop-opacity="1"/><stop offset="0.78" stop-color="#7c7c82" stop-opacity="0.12"/><stop offset="1" stop-color="#7c7c82" stop-opacity="0"/></linearGradient><linearGradient id="s-stub1" gradientUnits="userSpaceOnUse" x1="498" y1="0" x2="622" y2="0"><stop offset="0" stop-color="#7c7c82" stop-opacity="0"/><stop offset="0.22" stop-color="#7c7c82" stop-opacity="0.12"/><stop offset="0.40" stop-color="#7c7c82" stop-opacity="1"/><stop offset="0.60" stop-color="#7c7c82" stop-opacity="1"/><stop offset="0.78" stop-color="#7c7c82" stop-opacity="0.12"/><stop offset="1" stop-color="#7c7c82" stop-opacity="0"/></linearGradient><linearGradient id="s-stub2" gradientUnits="userSpaceOnUse" x1="498" y1="0" x2="622" y2="0"><stop offset="0" stop-color="#7c7c82" stop-opacity="0"/><stop offset="0.22" stop-color="#7c7c82" stop-opacity="0.12"/><stop offset="0.40" stop-color="#7c7c82" stop-opacity="1"/><stop offset="0.60" stop-color="#7c7c82" stop-opacity="1"/><stop offset="0.78" stop-color="#7c7c82" stop-opacity="0.12"/><stop offset="1" stop-color="#7c7c82" stop-opacity="0"/></linearGradient><linearGradient id="s-stub3" gradientUnits="userSpaceOnUse" x1="734" y1="0" x2="858" y2="0"><stop offset="0" stop-color="#7c7c82" stop-opacity="0"/><stop offset="0.22" stop-color="#7c7c82" stop-opacity="0.12"/><stop offset="0.40" stop-color="#7c7c82" stop-opacity="1"/><stop offset="0.60" stop-color="#7c7c82" stop-opacity="1"/><stop offset="0.78" stop-color="#7c7c82" stop-opacity="0.12"/><stop offset="1" stop-color="#7c7c82" stop-opacity="0"/></linearGradient><linearGradient id="s-stub4" gradientUnits="userSpaceOnUse" x1="734" y1="0" x2="858" y2="0"><stop offset="0" stop-color="#7c7c82" stop-opacity="0"/><stop offset="0.22" stop-color="#7c7c82" stop-opacity="0.12"/><stop offset="0.40" stop-color="#7c7c82" stop-opacity="1"/><stop offset="0.60" stop-color="#7c7c82" stop-opacity="1"/><stop offset="0.78" stop-color="#7c7c82" stop-opacity="0.12"/><stop offset="1" stop-color="#7c7c82" stop-opacity="0"/></linearGradient><linearGradient id="s-stub5" gradientUnits="userSpaceOnUse" x1="734" y1="0" x2="858" y2="0"><stop offset="0" stop-color="#7c7c82" stop-opacity="0"/><stop offset="0.22" stop-color="#7c7c82" stop-opacity="0.12"/><stop offset="0.40" stop-color="#7c7c82" stop-opacity="1"/><stop offset="0.60" stop-color="#7c7c82" stop-opacity="1"/><stop offset="0.78" stop-color="#7c7c82" stop-opacity="0.12"/><stop offset="1" stop-color="#7c7c82" stop-opacity="0"/></linearGradient><linearGradient id="s-stub6" gradientUnits="userSpaceOnUse" x1="734" y1="0" x2="858" y2="0"><stop offset="0" stop-color="#7c7c82" stop-opacity="0"/><stop offset="0.22" stop-color="#7c7c82" stop-opacity="0.12"/><stop offset="0.40" stop-color="#7c7c82" stop-opacity="1"/><stop offset="0.60" stop-color="#7c7c82" stop-opacity="1"/><stop offset="0.78" stop-color="#7c7c82" stop-opacity="0.12"/><stop offset="1" stop-color="#7c7c82" stop-opacity="0"/></linearGradient></defs>
+<line x1="324" y1="38" x2="324" y2="243" stroke="#ececea" stroke-width="1.2"/>
+<text x="324" y="256" font-size="14" fill="#6b6b70" text-anchor="middle" font-style="italic">t<tspan font-size="10.5" dy="3">0</tspan></text>
+<line x1="560" y1="38" x2="560" y2="243" stroke="#ececea" stroke-width="1.2"/>
+<text x="560" y="256" font-size="14" fill="#6b6b70" text-anchor="middle" font-style="italic">t<tspan font-size="10.5" dy="3">1</tspan></text>
+<line x1="796" y1="38" x2="796" y2="243" stroke="#ececea" stroke-width="1.2"/>
+<text x="796" y="256" font-size="14" fill="#6b6b70" text-anchor="middle" font-style="italic">t<tspan font-size="10.5" dy="3">2</tspan></text>
+<line x1="96" y1="236" x2="1072" y2="236" stroke="#6b6b70" stroke-width="1.2" marker-end="url(#s-ar)"/>
+<text x="1068" y="256" font-size="14" fill="#212228" text-anchor="end">time</text>
+<g id="hypothetical-stubs" class="s-truth">
+<path d="M 498.0 170.5 C 508.3 168.3 539.3 160.1 560.0 157.0 C 580.7 153.9 611.7 152.9 622.0 152.1" fill="none" stroke="url(#s-stub0)" stroke-width="2" stroke-dasharray="7 5" stroke-linecap="round"/>
+<path d="M 498.0 100.4 C 508.3 99.9 539.3 100.5 560.0 97.0 C 580.7 93.5 611.7 82.5 622.0 79.6" fill="none" stroke="url(#s-stub1)" stroke-width="2" stroke-dasharray="7 5" stroke-linecap="round"/>
+<path d="M 498.0 70.3 C 508.3 69.8 539.3 70.4 560.0 67.0 C 580.7 63.6 611.7 52.8 622.0 49.9" fill="none" stroke="url(#s-stub2)" stroke-width="2" stroke-dasharray="7 5" stroke-linecap="round"/>
+<path d="M 734.0 154.6 C 744.3 153.7 775.3 152.1 796.0 149.0 C 816.7 145.9 847.7 138.4 858.0 136.3" fill="none" stroke="url(#s-stub3)" stroke-width="2" stroke-dasharray="7 5" stroke-linecap="round"/>
+<path d="M 734.0 124.5 C 744.3 123.6 775.3 123.3 796.0 119.0 C 816.7 114.7 847.7 102.1 858.0 98.7" fill="none" stroke="url(#s-stub4)" stroke-width="2" stroke-dasharray="7 5" stroke-linecap="round"/>
+<path d="M 734.0 107.3 C 744.3 104.2 775.3 92.8 796.0 89.0 C 816.7 85.2 847.7 85.4 858.0 84.7" fill="none" stroke="url(#s-stub5)" stroke-width="2" stroke-dasharray="7 5" stroke-linecap="round"/>
+<path d="M 734.0 75.0 C 744.3 72.3 775.3 62.7 796.0 59.0 C 816.7 55.3 847.7 53.6 858.0 52.5" fill="none" stroke="url(#s-stub6)" stroke-width="2" stroke-dasharray="7 5" stroke-linecap="round"/>
+</g>
+<g id="observed-distribution" class="s-bell-obs">
+<path d="M 560 46.0 L 560.5 46.0 L 560.8 48.8 L 561.2 51.5 L 561.7 54.2 L 562.5 57.0 L 563.6 59.8 L 564.9 62.5 L 566.7 65.2 L 569.0 68.0 L 571.9 70.8 L 575.4 73.5 L 579.6 76.2 L 584.5 79.0 L 590.0 81.8 L 596.2 84.5 L 602.8 87.2 L 609.8 90.0 L 616.9 92.8 L 623.9 95.5 L 630.5 98.2 L 636.3 101.0 L 641.2 103.8 L 644.9 106.5 L 647.2 109.2 L 648.0 112.0 L 647.2 114.8 L 644.9 117.5 L 641.2 120.2 L 636.3 123.0 L 630.5 125.8 L 623.9 128.5 L 616.9 131.2 L 609.8 134.0 L 602.8 136.8 L 596.2 139.5 L 590.0 142.2 L 584.5 145.0 L 579.6 147.8 L 575.4 150.5 L 571.9 153.2 L 569.0 156.0 L 566.7 158.8 L 564.9 161.5 L 563.6 164.2 L 562.5 167.0 L 561.7 169.8 L 561.2 172.5 L 560.8 175.2 L 560.5 178.0 L 560 178.0" fill="url(#s-fade-b)" stroke="none"/>
+<path d="M 796 38.0 L 796.5 38.0 L 796.8 40.8 L 797.2 43.5 L 797.7 46.2 L 798.5 49.0 L 799.6 51.8 L 800.9 54.5 L 802.7 57.2 L 805.0 60.0 L 807.9 62.8 L 811.4 65.5 L 815.6 68.2 L 820.5 71.0 L 826.0 73.8 L 832.2 76.5 L 838.8 79.2 L 845.8 82.0 L 852.9 84.8 L 859.9 87.5 L 866.5 90.2 L 872.3 93.0 L 877.2 95.8 L 880.9 98.5 L 883.2 101.2 L 884.0 104.0 L 883.2 106.8 L 880.9 109.5 L 877.2 112.2 L 872.3 115.0 L 866.5 117.8 L 859.9 120.5 L 852.9 123.2 L 845.8 126.0 L 838.8 128.8 L 832.2 131.5 L 826.0 134.2 L 820.5 137.0 L 815.6 139.8 L 811.4 142.5 L 807.9 145.2 L 805.0 148.0 L 802.7 150.8 L 800.9 153.5 L 799.6 156.2 L 798.5 159.0 L 797.7 161.8 L 797.2 164.5 L 796.8 167.2 L 796.5 170.0 L 796 170.0" fill="url(#s-fade-b)" stroke="none"/>
+</g>
+<g id="generated-distribution-apart" class="s-bell-gen s-apart">
+<path d="M 560 92.0 L 560.5 92.0 L 560.8 94.8 L 561.2 97.5 L 561.7 100.2 L 562.5 103.0 L 563.6 105.8 L 564.9 108.5 L 566.7 111.2 L 569.0 114.0 L 571.9 116.8 L 575.4 119.5 L 579.6 122.2 L 584.5 125.0 L 590.0 127.8 L 596.2 130.5 L 602.8 133.2 L 609.8 136.0 L 616.9 138.8 L 623.9 141.5 L 630.5 144.2 L 636.3 147.0 L 641.2 149.8 L 644.9 152.5 L 647.2 155.2 L 648.0 158.0 L 647.2 160.8 L 644.9 163.5 L 641.2 166.2 L 636.3 169.0 L 630.5 171.8 L 623.9 174.5 L 616.9 177.2 L 609.8 180.0 L 602.8 182.8 L 596.2 185.5 L 590.0 188.2 L 584.5 191.0 L 579.6 193.8 L 575.4 196.5 L 571.9 199.2 L 569.0 202.0 L 566.7 204.8 L 564.9 207.5 L 563.6 210.2 L 562.5 213.0 L 561.7 215.8 L 561.2 218.5 L 560.8 221.2 L 560.5 224.0 L 560 224.0" fill="url(#s-fade-g)" stroke="none"/>
+<path d="M 796 98.0 L 796.5 98.0 L 796.8 100.8 L 797.2 103.5 L 797.7 106.2 L 798.5 109.0 L 799.6 111.8 L 800.9 114.5 L 802.7 117.2 L 805.0 120.0 L 807.9 122.8 L 811.4 125.5 L 815.6 128.2 L 820.5 131.0 L 826.0 133.8 L 832.2 136.5 L 838.8 139.2 L 845.8 142.0 L 852.9 144.8 L 859.9 147.5 L 866.5 150.2 L 872.3 153.0 L 877.2 155.8 L 880.9 158.5 L 883.2 161.2 L 884.0 164.0 L 883.2 166.8 L 880.9 169.5 L 877.2 172.2 L 872.3 175.0 L 866.5 177.8 L 859.9 180.5 L 852.9 183.2 L 845.8 186.0 L 838.8 188.8 L 832.2 191.5 L 826.0 194.2 L 820.5 197.0 L 815.6 199.8 L 811.4 202.5 L 807.9 205.2 L 805.0 208.0 L 802.7 210.8 L 800.9 213.5 L 799.6 216.2 L 798.5 219.0 L 797.7 221.8 L 797.2 224.5 L 796.8 227.2 L 796.5 230.0 L 796 230.0" fill="url(#s-fade-g)" stroke="none"/>
+</g>
+<g id="generated-distribution-near" class="s-bell-gen s-near">
+<path d="M 560 50.0 L 560.5 50.0 L 560.8 52.8 L 561.2 55.5 L 561.7 58.2 L 562.5 61.0 L 563.6 63.8 L 564.9 66.5 L 566.7 69.2 L 569.0 72.0 L 571.9 74.8 L 575.4 77.5 L 579.6 80.2 L 584.5 83.0 L 590.0 85.8 L 596.2 88.5 L 602.8 91.2 L 609.8 94.0 L 616.9 96.8 L 623.9 99.5 L 630.5 102.2 L 636.3 105.0 L 641.2 107.8 L 644.9 110.5 L 647.2 113.2 L 648.0 116.0 L 647.2 118.8 L 644.9 121.5 L 641.2 124.2 L 636.3 127.0 L 630.5 129.8 L 623.9 132.5 L 616.9 135.2 L 609.8 138.0 L 602.8 140.8 L 596.2 143.5 L 590.0 146.2 L 584.5 149.0 L 579.6 151.8 L 575.4 154.5 L 571.9 157.2 L 569.0 160.0 L 566.7 162.8 L 564.9 165.5 L 563.6 168.2 L 562.5 171.0 L 561.7 173.8 L 561.2 176.5 L 560.8 179.2 L 560.5 182.0 L 560 182.0" fill="url(#s-fade-g)" stroke="none"/>
+<path d="M 796 42.0 L 796.5 42.0 L 796.8 44.8 L 797.2 47.5 L 797.7 50.2 L 798.5 53.0 L 799.6 55.8 L 800.9 58.5 L 802.7 61.2 L 805.0 64.0 L 807.9 66.8 L 811.4 69.5 L 815.6 72.2 L 820.5 75.0 L 826.0 77.8 L 832.2 80.5 L 838.8 83.2 L 845.8 86.0 L 852.9 88.8 L 859.9 91.5 L 866.5 94.2 L 872.3 97.0 L 877.2 99.8 L 880.9 102.5 L 883.2 105.2 L 884.0 108.0 L 883.2 110.8 L 880.9 113.5 L 877.2 116.2 L 872.3 119.0 L 866.5 121.8 L 859.9 124.5 L 852.9 127.2 L 845.8 130.0 L 838.8 132.8 L 832.2 135.5 L 826.0 138.2 L 820.5 141.0 L 815.6 143.8 L 811.4 146.5 L 807.9 149.2 L 805.0 152.0 L 802.7 154.8 L 800.9 157.5 L 799.6 160.2 L 798.5 163.0 L 797.7 165.8 L 797.2 168.5 L 796.8 171.2 L 796.5 174.0 L 796 174.0" fill="url(#s-fade-g)" stroke="none"/>
+</g>
+<g id="trajectories-apart" class="s-traj s-apart">
+<path d="M 324.0 152.0 C 439.6 152.0 493.9 187.7 560.0 187.0 C 675.6 187.0 729.9 194.1 796.0 194.0" fill="none" stroke="#caa42d" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M 796.0 194.0 C 915.6 194.0 971.7 173.6 1040.0 174.0" fill="none" stroke="url(#s-tail)" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M 324.0 122.0 C 439.6 122.0 493.9 173.0 560.0 172.0 C 675.6 172.0 729.9 133.2 796.0 134.0" fill="none" stroke="#caa42d" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M 796.0 134.0 C 915.6 134.0 971.7 113.6 1040.0 114.0" fill="none" stroke="url(#s-tail)" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M 560.0 127.0 C 675.6 127.0 729.9 164.7 796.0 164.0" fill="none" stroke="#caa42d" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M 796.0 164.0 C 915.6 164.0 971.7 143.6 1040.0 144.0" fill="none" stroke="url(#s-tail)" stroke-width="2.4" stroke-linecap="round"/>
+<circle cx="560" cy="187" r="3.2" fill="#212228"/>
+<circle cx="796" cy="194" r="3.2" fill="#212228"/>
+<circle cx="560" cy="172" r="3.2" fill="#212228"/>
+<circle cx="796" cy="134" r="3.2" fill="#212228"/>
+<circle cx="796" cy="164" r="3.2" fill="#212228"/>
+</g>
+<g id="trajectories-near" class="s-traj s-near">
+<path d="M 324.0 152.0 C 439.6 152.0 493.9 141.8 560.0 142.0 C 675.6 142.0 729.9 133.8 796.0 134.0" fill="none" stroke="#caa42d" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M 796.0 134.0 C 915.6 134.0 971.7 113.6 1040.0 114.0" fill="none" stroke="url(#s-tail)" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M 324.0 122.0 C 439.6 122.0 493.9 111.8 560.0 112.0 C 675.6 112.0 729.9 103.8 796.0 104.0" fill="none" stroke="#caa42d" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M 796.0 104.0 C 915.6 104.0 971.7 83.6 1040.0 84.0" fill="none" stroke="url(#s-tail)" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M 560.0 127.0 C 675.6 127.0 729.9 72.9 796.0 74.0" fill="none" stroke="#caa42d" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M 796.0 74.0 C 915.6 74.0 971.7 53.6 1040.0 54.0" fill="none" stroke="url(#s-tail)" stroke-width="2.4" stroke-linecap="round"/>
+<circle cx="560" cy="142" r="3.2" fill="#212228"/>
+<circle cx="796" cy="134" r="3.2" fill="#212228"/>
+<circle cx="560" cy="112" r="3.2" fill="#212228"/>
+<circle cx="796" cy="104" r="3.2" fill="#212228"/>
+<circle cx="796" cy="74" r="3.2" fill="#212228"/>
+</g>
+<g id="view-discriminator-bracket" class="s-disc">
+<path d="M 897 32.0 L 906 32.0 L 906 176.0 L 897 176.0" fill="none" stroke="#212228" stroke-width="1.5"/>
+<line x1="906" y1="104.0" x2="920" y2="104.0" stroke="#212228" stroke-width="1.5"/>
+<text x="926" y="100.0" font-size="14" font-weight="700" fill="#212228">marginal distribution matching</text>
+<text x="926" y="118.0" font-size="13" fill="#6b6b70">at t<tspan font-size="10.5" dy="3">2</tspan><tspan dy="-3">, and at every observed time</tspan></text>
+<text x="782" y="46.0" font-size="14" fill="#499ecc" text-anchor="end">~ p<tspan font-size="10.5" dy="3">obs</tspan></text>
+<text x="810" y="192.0" font-size="14" fill="#9a7b14">~ p<tspan font-size="10.5" dy="3">gen</tspan></text>
+</g>
+<g id="view-generator-callout" class="s-gen-call">
+<circle cx="438.0" cy="164.5" r="4" fill="#212228"/>
+<circle cx="464.9" cy="170.8" r="4" fill="#212228"/>
+<circle cx="489.8" cy="177.0" r="4" fill="#212228"/>
+<line x1="444.8" y1="166.1" x2="458.1" y2="169.2" stroke="#212228" stroke-width="2.1" marker-end="url(#s-arg)"/>
+<line x1="471.7" y1="172.5" x2="483.0" y2="175.3" stroke="#212228" stroke-width="2.1" marker-end="url(#s-arg)"/>
+<text x="455.9" y="187.8" font-size="14" fill="#212228" text-anchor="end" font-style="italic">z<tspan font-size="10.5" dy="3">t</tspan></text>
+<text x="491.8" y="197.0" font-size="14" fill="#212228" text-anchor="middle" font-style="italic">z<tspan font-size="10.5" dy="3">t+1</tspan></text>
+<path d="M 438.9 203.0 L 438.9 209.0 L 505.8 209.0 L 505.8 203.0" fill="none" stroke="#6b6b70" stroke-width="1.2"/>
+<text x="472.4" y="226.0" font-size="13" fill="#6b6b70" text-anchor="middle">one generator update</text>
+</g>
+<line x1="96" y1="306" x2="1072" y2="306" stroke="#dcdcd8" stroke-width="1"/>
+<g id="panel-gen" class="s-panel s-panel-gen">
+<text x="96" y="338" font-size="16" font-weight="700" fill="#212228">Generator</text>
+<text x="96" y="357" font-size="13" fill="#6b6b70">One update rule, applied everywhere and always in the same way</text>
+<text x="96" y="392" font-size="16" fill="#212228"><tspan font-style="italic">z</tspan><tspan font-size="11.5" dy="3">t+1</tspan><tspan dx="4" dy="-3">= NCA</tspan><tspan font-size="11.5" dy="3">&#952;</tspan><tspan dy="-3">(</tspan><tspan font-style="italic">z</tspan><tspan font-size="11.5" dy="3">t</tspan><tspan dy="-3">, noise</tspan><tspan font-size="11.5" dy="3">t</tspan><tspan dy="-3">)</tspan></text>
+<text x="96" y="420" font-size="13" fill="#6b6b70">Every cell reads features from its own 3&#215;3</text>
+<text x="96" y="438" font-size="13" fill="#6b6b70">neighbourhood, passes them through one small</text>
+<text x="96" y="456" font-size="13" fill="#6b6b70">shared network, and is updated by the result.</text>
+<text x="96" y="484" font-size="13" fill="#6b6b70">The same NCA<tspan font-size="10.5" dy="3">&#952;</tspan><tspan dx="3" dy="-3">acts at every cell and every step,</tspan></text>
+<text x="96" y="502" font-size="13" fill="#6b6b70">so one rule has to account for the whole trajectory.</text>
+<rect x="526" y="356" width="28" height="28" fill="#caa42d" fill-opacity="0.495" stroke="#ececea"/>
+<rect x="554" y="356" width="28" height="28" fill="#caa42d" fill-opacity="0.512" stroke="#ececea"/>
+<rect x="582" y="356" width="28" height="28" fill="#caa42d" fill-opacity="0.472" stroke="#ececea"/>
+<rect x="610" y="356" width="28" height="28" fill="#caa42d" fill-opacity="0.019" stroke="#ececea"/>
+<rect x="638" y="356" width="28" height="28" fill="#caa42d" fill-opacity="0.271" stroke="#ececea"/>
+<rect x="526" y="384" width="28" height="28" fill="#caa42d" fill-opacity="0.173" stroke="#ececea"/>
+<rect x="554" y="384" width="28" height="28" fill="#caa42d" fill-opacity="0.233" stroke="#ececea"/>
+<rect x="582" y="384" width="28" height="28" fill="#caa42d" fill-opacity="0.035" stroke="#ececea"/>
+<rect x="610" y="384" width="28" height="28" fill="#caa42d" fill-opacity="0.059" stroke="#ececea"/>
+<rect x="638" y="384" width="28" height="28" fill="#caa42d" fill-opacity="0.184" stroke="#ececea"/>
+<rect x="526" y="412" width="28" height="28" fill="#caa42d" fill-opacity="0.072" stroke="#ececea"/>
+<rect x="554" y="412" width="28" height="28" fill="#caa42d" fill-opacity="0.190" stroke="#ececea"/>
+<rect x="582" y="412" width="28" height="28" fill="#caa42d" fill-opacity="0.004" stroke="#ececea"/>
+<rect x="610" y="412" width="28" height="28" fill="#caa42d" fill-opacity="0.020" stroke="#ececea"/>
+<rect x="638" y="412" width="28" height="28" fill="#caa42d" fill-opacity="0.346" stroke="#ececea"/>
+<rect x="526" y="440" width="28" height="28" fill="#caa42d" fill-opacity="0.171" stroke="#ececea"/>
+<rect x="554" y="440" width="28" height="28" fill="#caa42d" fill-opacity="0.223" stroke="#ececea"/>
+<rect x="582" y="440" width="28" height="28" fill="#caa42d" fill-opacity="0.362" stroke="#ececea"/>
+<rect x="610" y="440" width="28" height="28" fill="#caa42d" fill-opacity="0.138" stroke="#ececea"/>
+<rect x="638" y="440" width="28" height="28" fill="#caa42d" fill-opacity="0.012" stroke="#ececea"/>
+<rect x="526" y="468" width="28" height="28" fill="#caa42d" fill-opacity="0.395" stroke="#ececea"/>
+<rect x="554" y="468" width="28" height="28" fill="#caa42d" fill-opacity="0.269" stroke="#ececea"/>
+<rect x="582" y="468" width="28" height="28" fill="#caa42d" fill-opacity="0.313" stroke="#ececea"/>
+<rect x="610" y="468" width="28" height="28" fill="#caa42d" fill-opacity="0.289" stroke="#ececea"/>
+<rect x="638" y="468" width="28" height="28" fill="#caa42d" fill-opacity="0.528" stroke="#ececea"/>
+<rect x="554" y="384" width="28" height="28" fill="#caa42d" fill-opacity="0.95"/>
+<rect x="582" y="440" width="28" height="28" fill="#caa42d" fill-opacity="0.95"/>
+<rect x="526" y="356" width="84" height="84" fill="none" stroke="#8a6f0c" stroke-width="2" rx="3"/>
+<text x="606" y="435" font-size="11.5" fill="#8a6f0c" text-anchor="end" font-style="italic">&#952;</text>
+<rect x="554" y="412" width="84" height="84" fill="none" stroke="#8a6f0c" stroke-width="2" rx="3"/>
+<text x="634" y="491" font-size="11.5" fill="#8a6f0c" text-anchor="end" font-style="italic">&#952;</text>
+<text x="596.0" y="348" font-size="14" fill="#212228" text-anchor="middle" font-style="italic">z<tspan font-size="10.5" dy="3">t</tspan></text>
+<rect x="796" y="356" width="28" height="28" fill="#caa42d" fill-opacity="0.140" stroke="#ececea"/>
+<rect x="824" y="356" width="28" height="28" fill="#caa42d" fill-opacity="0.380" stroke="#ececea"/>
+<rect x="852" y="356" width="28" height="28" fill="#caa42d" fill-opacity="0.143" stroke="#ececea"/>
+<rect x="880" y="356" width="28" height="28" fill="#caa42d" fill-opacity="0.259" stroke="#ececea"/>
+<rect x="908" y="356" width="28" height="28" fill="#caa42d" fill-opacity="0.314" stroke="#ececea"/>
+<rect x="796" y="384" width="28" height="28" fill="#caa42d" fill-opacity="0.115" stroke="#ececea"/>
+<rect x="824" y="384" width="28" height="28" fill="#caa42d" fill-opacity="0.020" stroke="#ececea"/>
+<rect x="852" y="384" width="28" height="28" fill="#caa42d" fill-opacity="0.201" stroke="#ececea"/>
+<rect x="880" y="384" width="28" height="28" fill="#caa42d" fill-opacity="0.352" stroke="#ececea"/>
+<rect x="908" y="384" width="28" height="28" fill="#caa42d" fill-opacity="0.270" stroke="#ececea"/>
+<rect x="796" y="412" width="28" height="28" fill="#caa42d" fill-opacity="0.186" stroke="#ececea"/>
+<rect x="824" y="412" width="28" height="28" fill="#caa42d" fill-opacity="0.303" stroke="#ececea"/>
+<rect x="852" y="412" width="28" height="28" fill="#caa42d" fill-opacity="0.055" stroke="#ececea"/>
+<rect x="880" y="412" width="28" height="28" fill="#caa42d" fill-opacity="0.054" stroke="#ececea"/>
+<rect x="908" y="412" width="28" height="28" fill="#caa42d" fill-opacity="0.120" stroke="#ececea"/>
+<rect x="796" y="440" width="28" height="28" fill="#caa42d" fill-opacity="0.418" stroke="#ececea"/>
+<rect x="824" y="440" width="28" height="28" fill="#caa42d" fill-opacity="0.061" stroke="#ececea"/>
+<rect x="852" y="440" width="28" height="28" fill="#caa42d" fill-opacity="0.029" stroke="#ececea"/>
+<rect x="880" y="440" width="28" height="28" fill="#caa42d" fill-opacity="0.024" stroke="#ececea"/>
+<rect x="908" y="440" width="28" height="28" fill="#caa42d" fill-opacity="0.007" stroke="#ececea"/>
+<rect x="796" y="468" width="28" height="28" fill="#caa42d" fill-opacity="0.097" stroke="#ececea"/>
+<rect x="824" y="468" width="28" height="28" fill="#caa42d" fill-opacity="0.259" stroke="#ececea"/>
+<rect x="852" y="468" width="28" height="28" fill="#caa42d" fill-opacity="0.421" stroke="#ececea"/>
+<rect x="880" y="468" width="28" height="28" fill="#caa42d" fill-opacity="0.124" stroke="#ececea"/>
+<rect x="908" y="468" width="28" height="28" fill="#caa42d" fill-opacity="0.144" stroke="#ececea"/>
+<rect x="824" y="384" width="28" height="28" fill="#caa42d" fill-opacity="0.95"/>
+<rect x="852" y="440" width="28" height="28" fill="#caa42d" fill-opacity="0.95"/>
+<rect x="796" y="356" width="84" height="84" fill="none" stroke="#8a6f0c" stroke-width="2" rx="3"/>
+<text x="876" y="435" font-size="11.5" fill="#8a6f0c" text-anchor="end" font-style="italic">&#952;</text>
+<rect x="824" y="412" width="84" height="84" fill="none" stroke="#8a6f0c" stroke-width="2" rx="3"/>
+<text x="904" y="491" font-size="11.5" fill="#8a6f0c" text-anchor="end" font-style="italic">&#952;</text>
+<text x="866.0" y="348" font-size="14" fill="#212228" text-anchor="middle" font-style="italic">z<tspan font-size="10.5" dy="3">t+1</tspan></text>
+<line x1="709.0" y1="426.0" x2="753.0" y2="426.0" stroke="#6b6b70" stroke-width="1.4" marker-end="url(#s-ar)"/>
+<text x="731.0" y="418.0" font-size="13" fill="#6b6b70" text-anchor="middle">step</text>
+<text x="731.0" y="522" font-size="13" fill="#6b6b70" text-anchor="middle">the same &#952; at every cell and every step</text>
+</g>
+<g id="panel-disc" class="s-panel s-panel-disc">
+<text x="96" y="338" font-size="16" font-weight="700" fill="#212228">Discriminator</text>
+<text x="96" y="357" font-size="13" fill="#6b6b70">marginal distribution matching</text>
+<text x="96" y="384" font-size="13" fill="#6b6b70">Using the standard GAN adversarial game, the discriminator</text>
+<text x="96" y="402" font-size="13" fill="#6b6b70">ensures that the snapshots from the generated trajectories</text>
+<text x="96" y="420" font-size="13" fill="#6b6b70">match the observed ones at all available times.</text>
+<text x="96" y="448" font-size="13" fill="#6b6b70">This procedure doesn't require the entire real trajectory to</text>
+<text x="96" y="466" font-size="13" fill="#6b6b70">be observed, making it perfectly suitable for our setting.</text>
+<rect x="526" y="378" width="32" height="16" fill="#499ecc" fill-opacity="0.3" stroke="#499ecc"/>
+<text x="570" y="392" font-size="14" fill="#212228">observed distribution</text>
+<rect x="526" y="406" width="32" height="16" fill="#caa42d" fill-opacity="0.3" stroke="#caa42d"/>
+<text x="570" y="420" font-size="14" fill="#212228">generated distribution</text>
+<text x="526" y="462" font-size="13" fill="#6b6b70">Training drives the generated distribution onto the observed one at each time.</text>
+</g>
+<g id="legend" class="s-legend">
+<g transform="translate(96,280)"><line x1="0" y1="0" x2="28" y2="0" stroke="#7c7c82" stroke-width="2" stroke-dasharray="7 5"/></g>
+<text x="130" y="284" font-size="13" fill="#6b6b70">unobservable trajectory</text>
+<g transform="translate(306.6,280)"><circle cx="13" cy="0" r="5.6" fill="#499ecc" fill-opacity="0.75" stroke="#212228" stroke-width="1.5"/></g>
+<text x="340.6" y="284" font-size="13" fill="#6b6b70">unpaired observation</text>
+<g transform="translate(498.6,280)"><line x1="0" y1="0" x2="26" y2="0" stroke="#caa42d" stroke-width="2.4"/></g>
+<text x="532.6" y="284" font-size="13" fill="#6b6b70">simulated trajectory</text>
+</g>
+<g id="observations" class="s-obs">
+<circle cx="324" cy="152" r="5.6" fill="#499ecc" stroke="#212228" stroke-width="1.5"/>
+<circle cx="324" cy="122" r="5.6" fill="#499ecc" stroke="#212228" stroke-width="1.5"/>
+<circle cx="560" cy="157" r="5.6" fill="#499ecc" stroke="#212228" stroke-width="1.5"/>
+<circle cx="560" cy="127" r="5.6" fill="#499ecc" stroke="#212228" stroke-width="1.5"/>
+<circle cx="560" cy="97" r="5.6" fill="#499ecc" stroke="#212228" stroke-width="1.5"/>
+<circle cx="560" cy="67" r="5.6" fill="#499ecc" stroke="#212228" stroke-width="1.5"/>
+<circle cx="796" cy="149" r="5.6" fill="#499ecc" stroke="#212228" stroke-width="1.5"/>
+<circle cx="796" cy="119" r="5.6" fill="#499ecc" stroke="#212228" stroke-width="1.5"/>
+<circle cx="796" cy="89" r="5.6" fill="#499ecc" stroke="#212228" stroke-width="1.5"/>
+<circle cx="796" cy="59" r="5.6" fill="#499ecc" stroke="#212228" stroke-width="1.5"/>
+</g>
+</svg>

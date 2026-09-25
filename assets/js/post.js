@@ -527,6 +527,45 @@
         }
       })();
   }
+  /* --------------------------------------------------- injury outlines ---
+     The dashed-on-the-left wound has a counterpart on the right: when the
+     simulation is cut, the outline of the removed tissue shows over the
+     panel with the word "injury", then both fade. Driven off the video's
+     mediaTime rather than a CSS loop so the outline cannot drift away from
+     the frame that actually made the cut. */
+  function wireInjuryMarks(videoSel, trackName) {
+    var tr = TRACKS[trackName];
+    var video = document.querySelector(videoSel);
+    if (!tr || !tr.marks || !tr.marks.length || !video) return;
+    if (window.matchMedia
+        && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var gs = tr.marks.map(function (_m, i) {
+      return document.getElementById('hmark' + i);
+    });
+    var HOLD = 14, FADE = 46;        // frames held, then frames fading
+    function show(mediaTime) {
+      var f = (mediaTime || 0) * tr.fps;
+      for (var i = 0; i < gs.length; i++) {
+        if (!gs[i]) continue;
+        var age = f - tr.marks[i].f;
+        var o = 0;
+        if (age >= 0 && age <= HOLD) o = 1;
+        else if (age > HOLD && age < HOLD + FADE) o = 1 - (age - HOLD) / FADE;
+        gs[i].style.opacity = o;
+      }
+    }
+    if (video.requestVideoFrameCallback) {
+      var onFrame = function (now, meta) {
+        show(meta.mediaTime);
+        video.requestVideoFrameCallback(onFrame);
+      };
+      video.requestVideoFrameCallback(onFrame);
+    }
+    video.addEventListener('timeupdate', function () { show(video.currentTime); });
+    video.addEventListener('seeked', function () { show(video.currentTime); });
+    show(video.currentTime);
+  }
+
   respectReducedMotion();
   wireTrackedSpot('.cycle-video', 'cycle-spot', 'cycle');
   wireTrackedSpot('.ising-video', 'ising-spot', 'ising');
@@ -535,6 +574,7 @@
   wireTrackedSpot('.perturb-video', 'perturb-blue', 'perturb', 'blue');
   wireTrackedSpot('.perturb-video', 'perturb-red', 'perturb', 'red');
   wireTraceReveal('.perturb-video', '.perturb-plots .pp-trace');
+  wireInjuryMarks('.heart-video', 'heart');
   wireSchemeTabs();
   buildToc();
   wirePreviews();
